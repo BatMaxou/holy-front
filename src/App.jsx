@@ -1,5 +1,7 @@
+import TierList from "./pages/TierList";
+
 const App = () => {
-	return <div>Hello World</div>;
+	return <TierList />;
 }
 
 export default App;
