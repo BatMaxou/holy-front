@@ -1,0 +1,46 @@
+@function colors() {
+    @return
+        #D8F5D8,
+        #B3E0F2,
+        #E1C6FF,
+        #FFCB80,
+        #FF9E80,
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 180px;
+    border-bottom: 1px solid #000;
+    display: flex;
+
+    @for $i from 1 through 5 {
+        &:nth-child(#{$i}) {
+            ul, .title {
+                background: nth(colors(), $i);
+            }
+        }
+    }
+
+    ul {
+        flex: 1;
+    }
+
+    .title {
+        width: 200px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #000;
+        border-top: none;
+    }
+
+    &:first-child {
+        .title {
+           border-top: 1px solid #000;
+        }
+    }
+}

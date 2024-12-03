@@ -1,10 +1,12 @@
 import { apiBaseUrl } from "../utils/variables";
-import Flavour from "./ressource/flavour";
+import Tier from "./ressource/Tier";
+import TierList from "./ressource/TierList";
 
 class ApiClient {
     constructor() {
         this.baseUrl = apiBaseUrl;
-        this.flavour = new Flavour(this);
+        this.tierList = new TierList(this);
+        this.tier = new Tier(this);
         this.token = null;
     }
 
@@ -13,15 +15,15 @@ class ApiClient {
             .then(response => response.json())
     }
 
-    async post(url, body, additionnalHeaders = {}) {
+    async patch(url, body, additionnalHeaders = {}) {
         const headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
+            'Accept': 'application/merge-patch+json',
+            'Content-Type': 'application/merge-patch+json',
             ...additionnalHeaders,
         }
 
         return fetch(`${this.baseUrl}${url}`, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 ...headers,
                 Authorization: this.token ? `Bearer ${this.token}` : null
