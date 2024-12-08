@@ -13,7 +13,7 @@ const Row = ({ tier, elements, renderElement, onEnd, isDefault = false }) => {
     }, [elements]);
 
     return <div className={cn(style.row, {[style.default]: isDefault})}>
-        <h2 className={style.title}>{toFirstUpper(tier)}</h2>
+        {!isDefault && <h2 className={style.title}>{toFirstUpper(tier)}</h2>}
         <ReactSortable
             id={tier}
             tag="ul"
@@ -22,8 +22,8 @@ const Row = ({ tier, elements, renderElement, onEnd, isDefault = false }) => {
             swapThreshold={0.5}
             list={state}
             setList={setState}
-            className={style.row}
             onEnd={onEnd}
+            className={style.list}
         >
             {state.map(element => <li key={element.id} id={element.id}>
                 {renderElement(element)}

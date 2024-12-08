@@ -1,10 +1,16 @@
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
+}
+
+ul {
+    li {
+        list-style: none;
+    }
 }
