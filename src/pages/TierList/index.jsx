@@ -49,7 +49,9 @@ const TierList = () => {
 	}, []);
 
 	return <div className={style.tierList}>
-		<h1>HOLY Tier Liste</h1>
+		<h1>
+			<img src='/images/logo.webp' alt='logo' />
+		</h1>
 		<TierListComponent
 			tiers={tiers}
 			elements={rankedProducts}

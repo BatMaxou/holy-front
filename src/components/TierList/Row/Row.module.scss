@@ -10,37 +10,65 @@
 .row {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    min-height: 180px;
+    min-height: 150px;
     border-bottom: 1px solid #000;
-    display: flex;
+    border-right: 1px solid #000;
+
+    @media (max-width: 768px) {
+        min-height: 130px;
+    }
+
+    &:first-child, &.default {
+        border-top: 1px solid #000;
+    }
 
     @for $i from 1 through 5 {
         &:nth-child(#{$i}) {
-            ul, .title {
+            .list, .title {
                 background: nth(colors(), $i);
             }
         }
     }
-
-    ul {
+    
+    .list {
+        display: flex;
         flex: 1;
+        flex-wrap: wrap;
+        align-items: center;
+
+        @media (max-width: 768px) {
+            align-items: flex-end;
+        }
+  
     }
 
     .title {
+        font-size: 24px;
         width: 200px;
-        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 1px solid #000;
-        border-top: none;
+        border-right: 1px solid #000;
+        border-left: 1px solid #000;
+
+        @media (max-width: 768px) {
+            width: 100px;
+            font-size: 16px;
+        }
     }
 
-    &:first-child {
-        .title {
-           border-top: 1px solid #000;
+    &.default {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #DEDEDE;
+
+        .list {
+            flex-wrap: nowrap;
+            overflow-x: scroll;
+            scrollbar-width: thin;
+            scrollbar-color: nth(colors(), 5) transparent;
         }
     }
 }
