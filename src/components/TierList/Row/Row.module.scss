@@ -15,7 +15,7 @@
     border-right: 1px solid #000;
 
     @media (max-width: 768px) {
-        min-height: 120px;
+        min-height: 130px;
     }
 
     &:first-child, &.default {
@@ -35,6 +35,11 @@
         flex: 1;
         flex-wrap: wrap;
         align-items: center;
+
+        @media (max-width: 768px) {
+            align-items: flex-end;
+        }
+  
     }
 
     .title {
