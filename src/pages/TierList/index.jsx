@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 import style from "./TierList.module.scss";
 import apiClient from "../../api/ApiClient";
 import Card from "../../components/Card";
 import TierListComponent from "../../components/TierList";
+import Button from "../../components/ui/Button";
 
 const TierList = () => {	
     const [rankedProducts, setRankedProducts] = useState([]);
 	const [tiers, setTiers] = useState([]);
+	const router = useNavigate();
 
 	useEffect(() => {
 		apiClient.tierList.getItems().then((result) => setRankedProducts((Object.values(result) ?? []).reduce((acc, element) => {
@@ -48,10 +51,16 @@ const TierList = () => {
 		return [...withOrder.sort((a, b) => a.order - b.order), ...nullValues];
 	}, []);
 
+	const onLogout = useCallback(() => {
+		localStorage.removeItem('token');
+		router('/');
+	}, [router]);
+
 	return <div className={style.tierList}>
 		<h1>
 			<img src='/images/logo.webp' alt='logo' />
 		</h1>
+		<Button className={style.logout} onClick={onLogout}>Déconnexion</Button>
 		<TierListComponent
 			tiers={tiers}
 			elements={rankedProducts}

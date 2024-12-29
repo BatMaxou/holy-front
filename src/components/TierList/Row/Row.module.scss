@@ -1,25 +1,27 @@
+@use '../../../variables.scss' as v;
+
 @function colors() {
     @return
-        #D8F5D8,
-        #B3E0F2,
-        #E1C6FF,
-        #FFCB80,
-        #FF9E80,
+        v.$green,
+        v.$blue,
+        v.$pink,
+        v.$orange,
+        v.$red;
 }
 
 .row {
     width: 100%;
     display: flex;
     min-height: 150px;
-    border-bottom: 1px solid #000;
-    border-right: 1px solid #000;
+    border-bottom: 1px solid v.$black;
+    border-right: 1px solid v.$black;
 
     @media (max-width: 768px) {
         min-height: 130px;
     }
 
     &:first-child, &.default {
-        border-top: 1px solid #000;
+        border-top: 1px solid v.$black;;
     }
 
     @for $i from 1 through 5 {
@@ -48,8 +50,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        border-right: 1px solid #000;
-        border-left: 1px solid #000;
+        border-right: 1px solid v.$black;;
+        border-left: 1px solid v.$black;;
 
         @media (max-width: 768px) {
             width: 100px;
@@ -62,13 +64,15 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background-color: #DEDEDE;
+        border: none;
+        border-top: 5px solid v.$yellow;
+        background-color: v.$purple;
 
         .list {
             flex-wrap: nowrap;
             overflow-x: scroll;
             scrollbar-width: thin;
-            scrollbar-color: nth(colors(), 5) transparent;
+            scrollbar-color: v.$yellow transparent;
         }
     }
 }

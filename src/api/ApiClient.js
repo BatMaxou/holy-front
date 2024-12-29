@@ -67,6 +67,22 @@ class ApiClient {
             return { res, status };
         });
     }
+
+    async isLogged() {
+        const token = localStorage.getItem('token');
+        
+        if (!token) {
+            return false;
+        }
+
+        const testCall = await this.tier.getAll();
+        if (testCall.code === 401) {
+            localStorage.removeItem('token');
+            return false;
+        }
+
+        return true;
+    }
 }
 
 const apiClient = new ApiClient()

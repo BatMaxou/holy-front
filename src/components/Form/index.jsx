@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
+import style from './Form.module.scss';
 import { FormContextEnum } from "../../enums";
+import Button from "../ui/Button";
 
 const Form = ({ context, onSubmit }) => {
     const [values, setValues] = useState({});
@@ -30,18 +32,20 @@ const Form = ({ context, onSubmit }) => {
     const label = useMemo(() => {
         switch (context) {
             case FormContextEnum.CREATE_PASSWORD:
-                return "Créer";
+                return "Créer votre mot de passe";
             case FormContextEnum.LOGIN:
                 return "Connexion";
             default:
-                return "";
+                return "Soumettre";
         }
     }, [context]);
 
-    return <form onSubmit={handleSubmit}>
-        <input type="text" name="username" onChange={handleChange} value={values.username ?? ''} />
+    const isUsernameDisabled = useMemo(() => context === FormContextEnum.CREATE_PASSWORD, [context]); 
+
+    return <form onSubmit={handleSubmit} className={style.form}>
+        <input type="text" name="username" onChange={isUsernameDisabled ? null : handleChange} value={values.username ?? ''} disabled={isUsernameDisabled} />
         <input type="password" name="password" onChange={handleChange} value={values.password ?? ''} />
-        <button type="submit">{label}</button>
+        <Button type="submit">{label}</Button>
     </form>;
 };
 

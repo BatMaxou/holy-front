@@ -1,13 +1,19 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+
+import style from './Login.module.scss';
+import apiClient from "../../api/ApiClient";
 import Form from "../../components/Form";
 import { FormContextEnum } from "../../enums";
-import apiClient from "../../api/ApiClient";
-import { useNavigate } from "react-router";
 
 const Login = () => {
     const [step, setStep] = useState(FormContextEnum.LOGIN);
     const [otp, setOtp] = useState('');
     const router = useNavigate();
+
+    useEffect(() => {
+        apiClient.isLogged().then(isLogged => isLogged && router('/tier-list'));
+    }, [router]);
 
     const onLoginSubmit = useCallback(async values =>{
         apiClient.login(values).then(({ status }) => {
@@ -20,9 +26,10 @@ const Login = () => {
                 });
             } else {
                 router('/tier-list');
+                router(0);
             }
         });
-    }, []);
+    }, [router]);
     
     const onCreatePasswordSubmit = useCallback(async values => {
         apiClient.user.createPassword({...values, otp}).then(({ status }) => {
@@ -32,8 +39,8 @@ const Login = () => {
         });
     }, [otp]);
 
-    return <div>
-		<h1>
+    return <div className={style.page}>
+		<h1 className={style.logo}>
 			<img src='/images/logo.webp' alt='logo' />
 		</h1>
         <Form context={step} onSubmit={step === FormContextEnum.LOGIN ? onLoginSubmit : onCreatePasswordSubmit} />
