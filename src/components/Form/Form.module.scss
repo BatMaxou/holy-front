@@ -6,12 +6,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: calc(100% - 60px);
     max-width: 350px;
     background-color: v.$purple;
     border-radius: 10px;
     padding: 20px;
     aspect-ratio: 1/1;
+    gap: 20px;
 
     &::after, &::before {
         content: '';
@@ -38,7 +39,6 @@
     input {
         width: 100%;
         padding: 10px;
-        margin: 10px 0;
         border: none;
         border-radius: 5px;
         transition: all 0.2s;

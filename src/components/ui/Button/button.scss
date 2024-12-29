@@ -1,7 +1,7 @@
 @use 'sass:color';
 @use '../../../variables.scss' as v;
 
-.btn {
+.button {
     width: 100%;
     padding: 10px;
     border: none;
@@ -12,8 +12,8 @@
     font-weight: bold;
     cursor: pointer;
 
-    &:hover {
+    &:hover, &:focus {
         background-color: color.scale($color: v.$yellow, $alpha: -20%);
+        outline: none;
     }
-
 }
