@@ -29,8 +29,8 @@
     align-items: center;
     padding: 20px;
     gap: 20px;
-    color: var(--color-dark);
-    background-color: var(--notification-color);
+    color: v.$black;
+    font-weight: bold;
     animation: notification-appear .3s linear;
 
     &__close {

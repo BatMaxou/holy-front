@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 import style from "./TierList.module.scss";
@@ -6,11 +6,13 @@ import apiClient from "../../api/ApiClient";
 import Card from "../../components/Card";
 import TierListComponent from "../../components/TierList";
 import Button from "../../components/ui/Button";
+import { NotificationContext } from "../../context/NotificationContext";
 
 const TierList = () => {	
     const [rankedProducts, setRankedProducts] = useState([]);
 	const [tiers, setTiers] = useState([]);
 	const router = useNavigate();
+	const { addNotification } = useContext(NotificationContext);
 
 	useEffect(() => {
 		apiClient.tierList.getItems().then((result) => setRankedProducts((Object.values(result) ?? []).reduce((acc, element) => {
@@ -54,7 +56,8 @@ const TierList = () => {
 	const onLogout = useCallback(() => {
 		localStorage.removeItem('token');
 		router('/');
-	}, [router]);
+		addNotification({ message: 'Vous avez bien été déconnecté', type: 'info' });
+	}, [router, addNotification]);
 
 	return <div className={style.tierList}>
 		<h1>

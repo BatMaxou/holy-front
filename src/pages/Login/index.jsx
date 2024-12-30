@@ -25,7 +25,7 @@ const Login = () => {
                         setStep(FormContextEnum.CREATE_PASSWORD);
                         setOtp(values.password);
                     } else {
-                        addNotification({ message: 'Identifiants invalides', type: 'info' });
+                        addNotification({ message: 'Identifiants invalides', type: 'error' });
                     }
                 });
             } else if (status === 400) {
@@ -41,9 +41,11 @@ const Login = () => {
         apiClient.user.createPassword({...values, otp}).then(({ status }) => {
             if (status === 200) {
                 setStep(FormContextEnum.LOGIN);
+            } else {
+                addNotification({ message: 'Erreur lors de la création du mot de passe', type: 'error' });
             }
         });
-    }, [otp]);
+    }, [otp, addNotification]);
 
     return <div className={style.page}>
 		<h1 className={style.logo}>
